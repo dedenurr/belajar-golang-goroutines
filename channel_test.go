@@ -65,3 +65,25 @@ func TestInOutChannel(t *testing.T)  {
 	time.Sleep(2 * time.Second)
 	
 }
+
+// 5 channel buffer -> dilakukan agar data yang dimasukan bisa masuk ke dalam buffer time
+func TestBufferedChannel(t *testing.T)  {
+	channel := make(chan string, 2)
+	
+	// nilai channel yang dikirimkan harus sama dengan jumlah buffer di kode yang diatas yaitu 2, jika tidak sesuai akan deadlock
+	go func ()  {
+		channel <- "dede"
+		channel <- "nurrahman"
+	}()
+	
+
+	// jumlah channel yang diterima pun harus sama yaitu 2
+	go func ()  {
+		fmt.Println(<-channel)
+		fmt.Println(<-channel)
+	}()
+
+	time.Sleep(2 * time.Second)
+	fmt.Println("selesai buffer")
+	close(channel)
+}
