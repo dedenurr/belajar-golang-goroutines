@@ -47,7 +47,7 @@ func TestChannelAsParameter(t *testing.T)  {
 func OnlyIn(channel chan<- string)  {
 	time.Sleep(2 * time.Second)
 	channel <- "Dede Nurrahman"
-}
+}  
 
 // 4. channel out (menerima data)
 func OnlyOut(channel <-chan string)  {
